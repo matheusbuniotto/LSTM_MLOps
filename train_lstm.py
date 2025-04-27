@@ -16,7 +16,7 @@ train_dataset = TimeSeriesDataset(collector.X_train, collector.y_train)
 test_dataset = TimeSeriesDataset(collector.X_test, collector.y_test)
 
 model = LSTMModel(input_size=1, hidden_size=50, num_layers=3, output_size=1)
-model = train_model(model, train_dataset, test_dataset, num_epochs=2000)
+model = train_model(model, train_dataset, test_dataset, num_epochs=2500)
 
 predictions, actuals = evaluate_model(model, test_dataset)
 
@@ -24,4 +24,4 @@ rmse = root_mean_squared_error(np.vstack(actuals), np.vstack(predictions))
 
 print("Test RMSE:", rmse)
 
-ModelManager.save_model(model, "model/lstm_petra.pth")
+ModelManager.save_model(model, "src/model/lstm_petra.pth")
