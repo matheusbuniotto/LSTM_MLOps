@@ -1,11 +1,7 @@
-# src/data_processing/download_data.py
-
 import yfinance as yf
-import pandas as pd
 import os
 from datetime import datetime
 
-# --- Configurações ---
 # Ticker da ação que queremos baixar os dados
 TICKER = "PETR4.SA"
 # Período histórico para baixar os dados
