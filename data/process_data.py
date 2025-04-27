@@ -60,9 +60,11 @@ class DataCollector:
         X_train_flat = self.X_train.reshape((train_samples, train_nx * train_ny))
         X_test_flat = self.X_test.reshape((test_samples, test_nx * test_ny))
 
-        preprocessor = StandardScaler().fit(X_train_flat)
-        X_train_scaled = preprocessor.transform(X_train_flat)
-        X_test_scaled = preprocessor.transform(X_test_flat)
+        self.scaler = StandardScaler().fit(
+            X_train_flat
+        )  # armazenando o scaler para uso posterior
+        X_train_scaled = self.scaler.transform(X_train_flat)
+        X_test_scaled = self.scaler.transform(X_test_flat)
 
         self.X_train = X_train_scaled.reshape((train_samples, train_nx, train_ny))
         self.X_test = X_test_scaled.reshape((test_samples, test_nx, test_ny))
