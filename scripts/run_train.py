@@ -30,7 +30,7 @@ model_args = {
 }
 
 model = LSTMModel(**model_args)
-model = train_model(model, train_dataset, test_dataset, num_epochs=3500)
+model = train_model(model, train_dataset, test_dataset, num_epochs=500)
 
 predictions, actuals = evaluate_model(model, test_dataset)
 rmse = root_mean_squared_error(np.vstack(actuals), np.vstack(predictions))
@@ -38,3 +38,36 @@ rmse = root_mean_squared_error(np.vstack(actuals), np.vstack(predictions))
 print("Test RMSE:", rmse)
 
 ModelManager.save_model(model, "models/lstm_petra.pth", model_args)
+
+# ML FLow
+#
+import mlflow
+from mlflow.models import infer_signature
+
+# Set our tracking server uri for logging
+mlflow.set_tracking_uri(uri="http://127.0.0.1:8080")
+# Create a new MLflow Eperiment
+mlflow.set_experiment("MLflow Quickstart")
+
+# Start an MLflow run
+with mlflow.start_run():
+    # Log the hyperparameters
+    mlflow.log_params(model_args)
+
+    # Log the loss metric
+    mlflow.log_metric("RMSE", rmse)
+
+    # Set a tag that we can use to remind ourselves what this run was for
+    mlflow.set_tag("Training Info", "LSTM model for PETRA4")
+
+    # Infer the model signature
+    signature = infer_signature(collector.X_train, predictions)
+
+    # Log the model
+    model_info = mlflow.pytorch.log_model(
+        pytorch_model=model,
+        artifact_path="iris_model",
+        signature=signature,
+        input_example=collector.X_train,
+        registered_model_name="lstm-500e",
+    )

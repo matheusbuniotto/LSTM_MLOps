@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/759092558940040237/919596841a634e65b3ed5bab358de651/artifacts
+end_time: 1746123969708
+entry_point_name: ''
+experiment_id: '759092558940040237'
+lifecycle_stage: active
+run_id: 919596841a634e65b3ed5bab358de651
+run_name: gifted-colt-393
+run_uuid: 919596841a634e65b3ed5bab358de651
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1746123969658
+status: 4
+tags: []
+user_id: matheus
