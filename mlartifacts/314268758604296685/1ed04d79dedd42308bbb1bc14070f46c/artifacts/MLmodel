@@ -1,4 +1,3 @@
-artifact_path: iris_model
 flavors:
   python_function:
     config:
@@ -16,10 +15,10 @@ flavors:
     pytorch_version: 2.7.0+cu118
 is_signature_from_type_hint: false
 mlflow_version: 2.22.0
-model_size_bytes: 595519
-model_uuid: d8439250652347b4b34b9d1a5b4abc07
+model_size_bytes: 595595
+model_uuid: d9fb022c4c9a4b5e97e524b9401fbfce
 prompts: null
-run_id: 3bc541625476456786273ebd0e224b12
+run_id: 1ed04d79dedd42308bbb1bc14070f46c
 saved_input_example_info:
   artifact_path: input_example.json
   serving_input_path: serving_input_example.json
@@ -31,4 +30,4 @@ signature:
     "required": true}]'
   params: null
 type_hint_from_example: false
-utc_time_created: '2025-05-01 18:27:30.615785'
+utc_time_created: '2025-05-01 18:33:30.943970'

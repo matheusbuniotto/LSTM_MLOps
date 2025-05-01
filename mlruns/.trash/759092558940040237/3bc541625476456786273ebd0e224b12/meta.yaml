@@ -1,8 +1,9 @@
 artifact_uri: mlflow-artifacts:/759092558940040237/3bc541625476456786273ebd0e224b12/artifacts
+deleted_time: 1746125008875
 end_time: 1746124061812
 entry_point_name: ''
 experiment_id: '759092558940040237'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: 3bc541625476456786273ebd0e224b12
 run_name: carefree-wolf-630
 run_uuid: 3bc541625476456786273ebd0e224b12
