@@ -9,15 +9,13 @@ def train_model(
     test_dataset,
     num_epochs=50,
     batch_size=64,
-    learning_rate=0.001,
+    learning_rate=0.005,
 ):
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=False)
     test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
-    device = torch.device(
-        "cuda" if torch.cuda.is_available() else "cpu"
-    )  # <-- ADD THIS LINE
-    model = model.to(device)  # <-- MOVE MODEL TO DEVICE
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model = model.to(device)
 
     criterion = nn.MSELoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)

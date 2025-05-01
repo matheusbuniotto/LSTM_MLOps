@@ -16,8 +16,12 @@ class DataCollector:
         stock = yf.Ticker(self.ticker)
         stock_collected = stock.history(period="max", auto_adjust=True)
         stock_collected.index = stock_collected.index.tz_localize(None)
+
         data = pd.DataFrame(
-            {"date": stock_collected.index, "close": stock_collected["Close"].values}
+            {
+                "date": stock_collected.index,
+                "close": stock_collected["Close"].values,
+            }
         )
         if start_date:
             start_date = pd.to_datetime(start_date)
@@ -48,26 +52,29 @@ class DataCollector:
     def standard_scale(self):
         if self.X_train is None or self.X_test is None:
             raise ValueError("Data not split yet. Please call split_data() first.")
+
         train_samples, train_nx = self.X_train.shape
         test_samples, test_nx = self.X_test.shape
 
+        # Reshape X for scaling
         self.X_train = self.X_train.reshape((train_samples, train_nx, 1))
         self.X_test = self.X_test.reshape((test_samples, test_nx, 1))
 
-        train_samples, train_nx, train_ny = self.X_train.shape
-        test_samples, test_nx, test_ny = self.X_test.shape
+        # Scale X
+        self.scaler = StandardScaler()
+        X_train_flat = self.X_train.reshape((train_samples, -1))
+        X_test_flat = self.X_test.reshape((test_samples, -1))
 
-        X_train_flat = self.X_train.reshape((train_samples, train_nx * train_ny))
-        X_test_flat = self.X_test.reshape((test_samples, test_nx * test_ny))
-
-        self.scaler = StandardScaler().fit(
-            X_train_flat
-        )  # armazenando o scaler para uso posterior
-        X_train_scaled = self.scaler.transform(X_train_flat)
+        X_train_scaled = self.scaler.fit_transform(X_train_flat)
         X_test_scaled = self.scaler.transform(X_test_flat)
 
-        self.X_train = X_train_scaled.reshape((train_samples, train_nx, train_ny))
-        self.X_test = X_test_scaled.reshape((test_samples, test_nx, test_ny))
+        self.X_train = X_train_scaled.reshape((train_samples, train_nx, 1))
+        self.X_test = X_test_scaled.reshape((test_samples, test_nx, 1))
+
+        # Scale y (target)
+        self.target_scaler = StandardScaler()
+        self.y_train = self.target_scaler.fit_transform(self.y_train.reshape(-1, 1))
+        self.y_test = self.target_scaler.transform(self.y_test.reshape(-1, 1))
 
     def save_csv(self, file_path=None):
         if self.data is None:
@@ -75,14 +82,3 @@ class DataCollector:
         if file_path is None:
             file_path = f"data/raw/{self.ticker}_data.csv"
         self.data.to_csv(file_path, index=False)
-
-
-collector = DataCollector("AAPL")
-collector.get_data(start_date="2020-01-01")
-collector.split_data(test_size=0.1, window=25)
-collector.standard_scale()
-
-print("X_train:", collector.X_train.shape)
-print("y_train:", collector.y_train.shape)
-print("X_test:", collector.X_test.shape)
-print("y_test:", collector.y_test.shape)

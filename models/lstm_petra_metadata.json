@@ -1,0 +1,7 @@
+{
+    "input_size": 1,
+    "hidden_size": 50,
+    "num_layers": 5,
+    "output_size": 1,
+    "dropout": 0.1
+}
