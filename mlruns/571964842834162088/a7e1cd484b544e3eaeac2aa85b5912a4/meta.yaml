@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/571964842834162088/a7e1cd484b544e3eaeac2aa85b5912a4/artifacts
+end_time: 1746294095184
+entry_point_name: ''
+experiment_id: '571964842834162088'
+lifecycle_stage: active
+run_id: a7e1cd484b544e3eaeac2aa85b5912a4
+run_name: efficient-sow-781
+run_uuid: a7e1cd484b544e3eaeac2aa85b5912a4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1746294090299
+status: 3
+tags: []
+user_id: matheus

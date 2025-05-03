@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -30,7 +30,7 @@ model_args = {
 }
 
 model = LSTMModel(**model_args)
-model = train_model(model, train_dataset, test_dataset, num_epochs=5000)
+model = train_model(model, train_dataset, test_dataset, num_epochs=2500)
 
 predictions, actuals = evaluate_model(model, test_dataset)
 rmse = root_mean_squared_error(np.vstack(actuals), np.vstack(predictions))
@@ -45,9 +45,9 @@ import mlflow
 from mlflow.models import infer_signature
 
 # Set our tracking server uri for logging
-mlflow.set_tracking_uri(uri="http://127.0.0.1:8080")
+mlflow.set_tracking_uri(uri="http://0.0.0.0:8081")
 # Create a new MLflow Eperiment
-mlflow.set_experiment("MLflow - LSTM")
+mlflow.set_experiment("LSTM-PETRA")
 
 # Start an MLflow run
 with mlflow.start_run():
@@ -66,8 +66,8 @@ with mlflow.start_run():
     # Log the model
     model_info = mlflow.pytorch.log_model(
         pytorch_model=model,
-        artifact_path=None,
+        artifact_path="mlartifacts",
         signature=signature,
         input_example=collector.X_train,
-        registered_model_name="lstm-5000-epochs",
+        registered_model_name="lstm-2000-epochs",
     )

@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1746294095180
+current_stage: None
+description: ''
+last_updated_timestamp: 1746294095180
+name: lstm-2000-epochs
+run_id: a7e1cd484b544e3eaeac2aa85b5912a4
+run_link: ''
+source: mlflow-artifacts:/571964842834162088/a7e1cd484b544e3eaeac2aa85b5912a4/artifacts/mlartifacts
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/571964842834162088/a7e1cd484b544e3eaeac2aa85b5912a4/artifacts/mlartifacts
+user_id: null
+version: 1
