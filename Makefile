@@ -25,6 +25,7 @@ help:
 	@echo "  lint           - Executa linting nos arquivos Python"
 	@echo "  predict        - Executa scripts/predict.py localmente"
 	@echo "  predict-docker - Executa scripts/predict.py dentro do contêiner Docker"
+	@echo "  predict-api-docker - Executa a API de predição dentro do contêiner Docker"
 
 # Build ma imagem Docker
 .PHONY: build
@@ -42,10 +43,10 @@ run:
 			docker start $(CONTAINER_NAME); \
 		fi \
 	else \
-		echo "Criando e iniciando novo container $(CONTAINER_NAME)..."; \
-		docker run -d --name $(CONTAINER_NAME) -p $(PORT):$(PORT) $(IMAGE_NAME); \
+		docker run -d --name $(CONTAINER_NAME) -p 8081:8081 -p 8000:8000 $(IMAGE_NAME); \
 	fi
 	@echo "\nMLflow UI disponível em: http://localhost:$(PORT)"
+	@echo "API disponível em: http://localhost:8000"
 	@echo "Outros links úteis:"
 	@echo "- Documentação MLflow: https://mlflow.org/docs/latest/index.html"
 
@@ -140,3 +141,18 @@ predict-docker:
 		echo "\n❌ PREDIÇÃO DOCKER: FALHA - A predição falhou com código de saída $$EXIT_CODE"; \
 	fi; \
 	exit $$EXIT_CODE
+
+# Executa a API de predição dentro do contêiner Docker
+.PHONY: predict-api-docker
+predict-api-docker:
+	@echo "\n🔍 Verificando se o contêiner $(CONTAINER_NAME) está em execução..."
+	@if [ ! "$$(docker ps -q -f name=$(CONTAINER_NAME))" ]; then \
+		echo "❌ Contêiner $(CONTAINER_NAME) não está em execução. Executando..."; \
+		$(MAKE) run; \
+		echo "⏳ Aguardando inicialização do container (5s)..."; \
+		sleep 5; \
+	else \
+		echo "✅ Contêiner $(CONTAINER_NAME) já está em execução."; \
+	fi
+	@echo "\n🤖 Executando API de predição no contêiner..."
+	@docker exec $(CONTAINER_NAME) uvicorn api:app --host 0.0.0.0 --port 8000

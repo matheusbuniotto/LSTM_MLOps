@@ -39,7 +39,7 @@ class DataCollector:
         except Exception as e:
             print(f"Error fetching data from yfinance: {e}")
             print("Falling back to PETRA_4.csv data for prediction.")
-            fallback_path = os.path.join("data", "raw", "PETRA_4.csv")
+            fallback_path = os.path.join("data", "PETRA_4.csv")
             self.data = pd.read_csv(fallback_path, parse_dates=["date"])
 
     def split_data(self, test_size=0.2, window=30):

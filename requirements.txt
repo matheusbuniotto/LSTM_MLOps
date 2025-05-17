@@ -101,3 +101,4 @@ wrapt==1.17.2
 yfinance
 zipp==3.21.0
 curl_cffi
+fastapi

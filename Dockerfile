@@ -18,8 +18,8 @@ RUN chmod +x /app/start.sh
 # Copy the rest of your application code
 COPY . .
 
-# Expose the port MLflow will run on
-EXPOSE 8081
+# Expose ports for MLflow and API
+EXPOSE 8081 8000
 
 # Use the start script as the entrypoint
 CMD ["/app/start.sh"]
