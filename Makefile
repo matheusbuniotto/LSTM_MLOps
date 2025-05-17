@@ -22,12 +22,11 @@ help:
 	@echo "  test-docker    - Executa scripts/test.py dentro do contêiner Docker"
 	@echo "  install        - Instala dependências localmente"
 	@echo "  clean          - Limpa imagens e contêineres Docker"
-	@echo "  lint           - Executa linting nos arquivos Python"
 	@echo "  predict        - Executa scripts/predict.py localmente"
 	@echo "  predict-docker - Executa scripts/predict.py dentro do contêiner Docker"
 	@echo "  predict-api-docker - Executa a API de predição dentro do contêiner Docker"
 
-# Build ma imagem Docker
+# Build na imagem Docker
 .PHONY: build
 build:
 	docker build -t $(IMAGE_NAME) .
@@ -108,11 +107,6 @@ clean:
 	docker rm -f $(docker ps -aq) || true
 	echo "Removendo TODAS as imagens Docker..."
 	docker rmi -f $(docker images -aq) || true
-
-# Executa linting (usando flake8 como exemplo)
-.PHONY: lint
-lint:
-	$(UV) run flake8 scripts/ data/ src/
 
 # Executa scripts/predict.py
 .PHONY: predict
