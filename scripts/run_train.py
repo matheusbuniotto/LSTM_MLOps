@@ -71,3 +71,9 @@ with mlflow.start_run():
         input_example=collector.X_train,
         registered_model_name="lstm-2000-epochs",
     )
+    
+    # Get the model version and set it as the champion
+    client = mlflow.MlflowClient()
+    latest_version = client.get_latest_versions("lstm-2000-epochs", stages=["None"])[0].version
+    client.set_registered_model_alias("lstm-2000-epochs", "champion", latest_version)
+    print(f"Model version {latest_version} set as 'champion' alias")
