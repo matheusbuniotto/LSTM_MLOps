@@ -4,23 +4,19 @@ WORKDIR /app
 
 COPY requirements.txt requirements.txt
 
-# Install ONLY your *other* dependencies (MLflow, pandas, etc.)
-# You might need to install system dependencies here if required by other packages
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
-  # Add any other system libraries required by your dependencies here
   && rm -rf /var/lib/apt/lists/* \
   && pip install --no-cache-dir -r requirements.txt
 
-# Copy the start script and make it executable
+
+COPY . .
+
 COPY start.sh /app/start.sh
 RUN chmod +x /app/start.sh
-
-# Copy the rest of your application code
-COPY . .
 
 # Expose ports for MLflow and API
 EXPOSE 8081 8000
 
-# Use the start script as the entrypoint
+# Run entry 
 CMD ["/app/start.sh"]
 

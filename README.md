@@ -49,6 +49,12 @@ cd LSTM_MLOps
 make build
 make run
 ```
+2.1. Others make commands are avaliable, use make help to show
+```bash
+make help
+make stop 
+make clean 
+```
 
 ### Using the API
 
