@@ -1,8 +1,8 @@
 # LSTM MLOps Project for Stock Prediction
 
-This project, an outcome of FIAP's Machine Learning Engineer graduate / post-graduate degree, centers on an LSTM-based stock prediction system that incorporates MLOps best practices. We're using FastAPI for serving predictions and MLflow for experiment tracking, model saves and deploy pipeline.
+This project, an outcome of FIAP's Machine Learning Engineer graduate / post-graduate degree, centers on an LSTM-based stock prediction system that incorporates MLOps. We're using FastAPI for serving predictions and MLflow for experiment tracking, model saves and deploy pipeline.
 
-**My main emphasis was on implementing MLflow and setting up an API endpoint to serve the model with MLOps best practices.** It's no secret that predicting stock prices is really tough, given how unpredictable markets are. So, while the LSTM model itself is functional, it's definitely a work in progress and would need much more refinement (think hyperparameter tuning and better feature engineering) to be close to effective. **The focus was definitely on the MLOps pipeline, not on creating a perfect prediction model.**
+It's no secret that predicting stock prices is really tough, given how unpredictable markets are. So, while the LSTM model itself is functional, it's definitely a work in progress and would need much more refinement (think hyperparameter tuning and better feature engineering) to be close to effective in reality.
 
 ## Project Overview
 
