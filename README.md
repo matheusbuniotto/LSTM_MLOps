@@ -71,8 +71,8 @@ The prediction API is available at `http://localhost:8000/predict` with the foll
 GET /predict?stock=PETR4.SA&window=30&start_date=2024-01-01
 ```
 
-```http
-curl "http://localhost:8000/predict?stock=PETR4.SA&window=30"
+```bash
+curl http://localhost:8000/predict?stock=PETR4.SA&window=30
 ```
 
 Parameters:
