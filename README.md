@@ -12,11 +12,12 @@ This project utilizes Deep Learning (LSTM) to predict stock prices, specifically
 ## Architecture
 
 ```
-├── api.py                 # FastAPI endpoint for predictions
-├── data/                  # Data processing and storage
-├── models/               # Trained model storage
-├── mlruns/               # MLflow experiment tracking
-├── src/                  # Source code
+├── api.py               # FastAPI endpoint for predictions
+├── data/                # Data processing and storage
+├── models/              # Trained model storage
+├── mlruns/              # MLflow experiment tracking
+├── scripts/             # Specific scripts to run processes
+├── src/                 # Source code
 │   ├── model/           # Model architecture
 │   ├── training/        # Training procedures
 │   └── utils/           # Utility functions
