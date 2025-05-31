@@ -1,10 +1,13 @@
 # LSTM MLOps Project for Stock Prediction
 
-This project implements a LSTM-based stock price prediction system with MLOps best practices, using FastAPI for serving predictions and MLflow for experiment tracking.
+This project, an outcome of FIAP's Machine Learning Engineer graduate / post-graduate degree, centers on an LSTM-based stock prediction system that incorporates MLOps best practices. We're using FastAPI for serving predictions and MLflow for experiment tracking, model saves and deploy pipeline.
+
+**My main emphasis was on implementing MLflow and setting up an API endpoint to serve the model with MLOps best practices.** It's no secret that predicting stock prices is really tough, given how unpredictable markets are. So, while the LSTM model itself is functional, it's definitely a work in progress and would need much more refinement (think hyperparameter tuning and better feature engineering) to be close to effective. **The focus was definitely on the MLOps pipeline, not on creating a perfect prediction model.**
 
 ## Project Overview
 
-This project uses Deep Learning (LSTM) to predict stock prices, with a focus on PETROBRAS (PETR4.SA) stock. The system is containerized using Docker and implements MLOps practices for model tracking and serving.
+This project utilizes Deep Learning (LSTM) to predict stock prices, specifically for PETROBRAS (PETR4.SA). The system is containerized using Docker and employs MLOps practices for model tracking and serving.
+
 
 ## Architecture
 
@@ -52,6 +55,7 @@ make run
 2.1. Others make commands are avaliable, use make help to show
 ```bash
 make help
+make test
 make stop 
 make clean 
 ```
@@ -92,8 +96,11 @@ MLflow UI is available at `http://localhost:8081` for:
 ### Core Components
 
 1. **Data Processing (`data/`)**
-   - `process_data.py`: Data collection and preprocessing
+   - `process_data.py`: Data collection and preprocessing using yahoo finance library
    - `PETRA_4.csv`: Historical stock data (fallback)
+
+   ** The fallback was needed due to some rate limits erros when using yahoo finance. If theres no need for the fallback,
+   the data will be collected directly from the yfinance.**  
 
 2. **Model (`src/model/`)**
    - `lstm_model.py`: LSTM model architecture
