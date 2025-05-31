@@ -73,7 +73,7 @@ GET /predict?stock=PETR4.SA&window=30&start_date=2024-01-01
 
 ```http
 curl "http://localhost:8000/predict?stock=PETR4.SA&window=30"
-``````
+```
 
 Parameters:
 - `stock`: Stock symbol (default: PETR4.SA)
